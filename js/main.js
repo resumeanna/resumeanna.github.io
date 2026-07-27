@@ -47,4 +47,39 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = new Date().getFullYear();
   });
+
+  // Promo popup — opens on landing, closes on X / backdrop / Esc, and
+  // auto-closes after 12s (the progress bar animation is the countdown).
+  var promo = document.getElementById('promoPop');
+  if (promo) {
+    var timer = null;
+
+    function closePromo() {
+      if (promo.hidden) return;
+      clearTimeout(timer);
+      promo.hidden = true;
+      document.body.classList.remove('promo-open');
+      document.removeEventListener('keydown', onKey);
+    }
+    function onKey(e) { if (e.key === 'Escape') closePromo(); }
+
+    function openPromo() {
+      promo.hidden = false;
+      document.body.classList.add('promo-open');
+      document.addEventListener('keydown', onKey);
+      timer = setTimeout(closePromo, 12000);
+      var x = promo.querySelector('.promo-x');
+      if (x) x.focus({ preventScroll: true });
+    }
+
+    promo.querySelectorAll('[data-promo-close]').forEach(function (el) {
+      el.addEventListener('click', closePromo);
+    });
+    // following an offer link should not leave the popup mid-close
+    promo.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () { clearTimeout(timer); });
+    });
+
+    setTimeout(openPromo, 700);
+  }
 });
