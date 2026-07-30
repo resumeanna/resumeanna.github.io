@@ -82,4 +82,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
     setTimeout(openPromo, 700);
   }
+
+  // Cover-letter lightbox — opens from the "View cover letter" button,
+  // closes on X / backdrop / Esc. Restores focus to the trigger on close.
+  var clPop = document.getElementById('clPop');
+  if (clPop) {
+    var clLast = null;
+
+    function closeCl() {
+      if (clPop.hidden) return;
+      clPop.hidden = true;
+      document.body.classList.remove('promo-open');
+      document.removeEventListener('keydown', onClKey);
+      if (clLast) { clLast.focus({ preventScroll: true }); clLast = null; }
+    }
+    function onClKey(e) { if (e.key === 'Escape') closeCl(); }
+
+    function openCl(trigger) {
+      clLast = trigger || null;
+      clPop.hidden = false;
+      document.body.classList.add('promo-open');
+      document.addEventListener('keydown', onClKey);
+      var x = clPop.querySelector('.cl-x');
+      if (x) x.focus({ preventScroll: true });
+    }
+
+    document.querySelectorAll('[data-cl-open]').forEach(function (btn) {
+      btn.addEventListener('click', function () { openCl(btn); });
+    });
+    clPop.querySelectorAll('[data-cl-close]').forEach(function (el) {
+      el.addEventListener('click', closeCl);
+    });
+  }
 });
