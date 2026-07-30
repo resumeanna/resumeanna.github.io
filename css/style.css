@@ -1967,3 +1967,144 @@ body.promo-open { overflow: hidden; }
   .cl-card { width: 100%; max-height: calc(100vh - 32px); }
   .cl-head { padding: 13px 13px 12px 16px; }
 }
+
+/* ============================================================
+   Single-page resume catalogue — jump nav, plan sections, sale cards
+   ============================================================ */
+.plan-jump {
+  position: sticky;
+  top: 74px;
+  z-index: 20;
+  background: rgba(255, 255, 255, .92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+.plan-jump-in { display: flex; gap: 10px; padding: 10px 0; overflow-x: auto; scrollbar-width: none; }
+.plan-jump-in::-webkit-scrollbar { display: none; }
+.plan-jump a {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 9px 16px;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  background: #fff;
+  white-space: nowrap;
+  transition: border-color .2s ease, transform .2s ease;
+}
+.plan-jump a:hover { border-color: var(--orange); transform: translateY(-1px); }
+.plan-jump a b { font-family: var(--font-head); font-size: 14px; font-weight: 600; color: var(--ink); }
+.plan-jump a span { font-family: var(--font-head); font-size: 13px; font-weight: 700; color: var(--orange); }
+
+section.plan-sec[id] { padding: 60px 0; scroll-margin-top: 176px; }
+.plan-head {
+  text-align: center;
+  padding-bottom: 22px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid var(--line);
+}
+.plan-head h2 {
+  font-size: clamp(25px, 4.2vw, 36px);
+  letter-spacing: -.02em;
+  margin-bottom: 14px;
+}
+.plan-price {
+  font-family: var(--font-head);
+  font-weight: 800;
+  color: #fff;
+  background: var(--grad);
+  border-radius: 999px;
+  padding: 4px 17px;
+  font-size: .6em;
+  vertical-align: middle;
+  margin-left: 8px;
+  box-shadow: 0 8px 18px rgba(240, 78, 35, .3);
+}
+.plan-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.plan-chips span {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--body);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+/* ---------- pinned ₹99 sale cards ---------- */
+.sale-card {
+  position: relative;
+  border: 2px solid var(--orange);
+  box-shadow: 0 16px 38px rgba(240, 78, 35, .22);
+  overflow: visible;
+}
+.sale-card .thumb { border-radius: 16px 16px 0 0; overflow: hidden; }
+.sale-card:hover { box-shadow: 0 24px 50px rgba(240, 78, 35, .3); }
+.sale-ribbon {
+  position: absolute;
+  top: -13px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  font-family: var(--font-head);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--grad);
+  border: 2px solid #fff;
+  border-radius: 999px;
+  padding: 5px 15px;
+  box-shadow: 0 8px 18px rgba(240, 78, 35, .4);
+}
+.sale-ribbon svg { width: 13px; height: 13px; }
+.sale-card .sample-body { background: linear-gradient(180deg, #FFF8F5 0%, #fff 70%); }
+
+.sale-price-row { display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+.sale-now {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--orange);
+  letter-spacing: -.02em;
+}
+.sale-now .rupee { font-size: 19px; }
+.sale-was { font-size: 15px; font-weight: 600; color: var(--muted); text-decoration: line-through; }
+.sale-save {
+  margin-left: auto;
+  font-family: var(--font-head);
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #12703C;
+  background: #E8F7EE;
+  border: 1px solid #BFE6CE;
+  border-radius: 999px;
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+.btn-sale {
+  background: var(--grad);
+  color: #fff;
+  border: none;
+  box-shadow: 0 10px 22px rgba(240, 78, 35, .34);
+}
+.btn-sale:hover { filter: brightness(1.05); }
+
+@media (max-width: 1000px) { .plan-jump { top: 64px; } section.plan-sec[id] { scroll-margin-top: 164px; } }
+@media (max-width: 640px) {
+  section.plan-sec[id] { padding: 44px 0; }
+  .plan-head { padding-bottom: 18px; margin-bottom: 24px; }
+  .plan-chips span { font-size: 11.5px; padding: 5px 11px; }
+  .sale-now { font-size: 26px; }
+  .sale-ribbon { font-size: 10.5px; padding: 4px 12px; }
+  .plan-jump-in { gap: 8px; padding: 8px 0; }
+  .plan-jump a { padding: 8px 13px; }
+  .plan-jump a b { font-size: 13px; }
+}
