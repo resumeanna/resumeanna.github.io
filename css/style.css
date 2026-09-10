@@ -2108,3 +2108,24 @@ section.plan-sec[id] { padding: 60px 0; scroll-margin-top: 176px; }
   .plan-jump a { padding: 8px 13px; }
   .plan-jump a b { font-size: 13px; }
 }
+
+/* DIY templates CTA — long label must wrap instead of forcing the page wide */
+.btn-wa.btn-lg { max-width: 100%; white-space: normal; text-align: center; }
+@media (max-width: 560px) {
+  .btn-wa.btn-lg { width: 100%; padding-inline: 18px; font-size: 15px; line-height: 1.35; }
+}
+
+/* ============================================================
+   Five services + seven nav items — keep both from breaking
+   ============================================================ */
+/* the last row of the 3-up service grid now holds 2 cards; centre them */
+.svc-grid { grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+@media (min-width: 1001px) {
+  .svc-grid { grid-template-columns: repeat(3, 1fr); }
+  .svc-grid > .svc-card:nth-last-child(2):nth-child(3n + 1) { grid-column: 1 / 2; }
+}
+/* nav got two more links — tighten before it wraps into the logo */
+@media (min-width: 1001px) and (max-width: 1240px) {
+  .site-nav { gap: 17px; }
+  .site-nav a:not(.btn) { font-size: 14px; }
+}
